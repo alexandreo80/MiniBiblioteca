@@ -1,0 +1,18 @@
+# Build results
+[Bb]in/
+[Oo]bj/
+*.dll
+*.exe
+*.pdb
+
+# User settings
+*.user
+*.suo
+*.csproj.user
+
+# Environment files
+appsettings*.json
+!.gitignore
+
+# Data files (opcional - se não quiser subir dados de teste)
+Data/*.json

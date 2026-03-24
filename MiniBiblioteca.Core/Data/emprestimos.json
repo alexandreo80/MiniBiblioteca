@@ -1,0 +1,10 @@
+[
+  {
+    "Id": "56dea1a5-33e1-4c3e-813d-78276cd99760",
+    "LivroIsbn": "978-8532649966",
+    "UsuarioId": "1",
+    "DataEmprestimo": "2026-03-24T16:01:17.3659439-03:00",
+    "DataDevolucao": null,
+    "PrazoDias": 7
+  }
+]
