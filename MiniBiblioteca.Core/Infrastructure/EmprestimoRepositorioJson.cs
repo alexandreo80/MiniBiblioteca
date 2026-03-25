@@ -25,6 +25,16 @@ public class EmprestimoRepositorioJson : IEmprestimoRepositorio
         return _emprestimos.FirstOrDefault(e => e.Id == id);
     }
 
+    public void Remover(string id)
+    {
+        var emprestimo = _emprestimos.FirstOrDefault(e => e.Id == id);
+        if (emprestimo is not null)
+        {
+            _emprestimos.Remove(emprestimo);
+            SalvarNoArquivo();
+        }
+    }
+
     public List<Emprestimo> ListarPorUsuario(string usuarioId)
     {
         return _emprestimos.Where(e => e.UsuarioId == usuarioId).ToList();

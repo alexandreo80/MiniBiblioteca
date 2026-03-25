@@ -22,10 +22,11 @@ while (true)
     System.Console.WriteLine("\n1. Cadastrar Livro");
     System.Console.WriteLine("2. Cadastrar Usuário");
     System.Console.WriteLine("3. Emprestar Livro");
-    System.Console.WriteLine("4. Listar Livros");
-    System.Console.WriteLine("5. Listar Usuários");
-    System.Console.WriteLine("6. Listar Empréstimos");
-    System.Console.WriteLine("7. Sair\n");
+    System.Console.WriteLine("4. Devolver Livro");
+    System.Console.WriteLine("5. Listar Livros");
+    System.Console.WriteLine("6. Listar Usuários");
+    System.Console.WriteLine("7. Listar Empréstimos");
+    System.Console.WriteLine("8. Sair\n");
 
     Console.Write("Escolha uma opção: ");
     var escolha = Console.ReadLine();
@@ -60,7 +61,7 @@ while (true)
 
             Usuario usuario = new Usuario(id, nome, email, cpf);
             usuarioRepo.Adicionar(usuario);
-            System.Console.WriteLine("Usuário cadastrado!");
+            System.Console.WriteLine("Usuário cadastrado!\n");
 
             break;
 
@@ -72,13 +73,33 @@ while (true)
 
             var resultado = emprestimoService.Emprestar(isbnEmprestimo, usuarioIdEmprestimo);
             if (resultado.Sucesso)
-                System.Console.WriteLine("Emprestimo Realizado!");
+                System.Console.WriteLine("Emprestimo Realizado!\n");
             else
-                System.Console.WriteLine($"{resultado.Erro}");
+                System.Console.WriteLine($"{resultado.Erro}\n");
 
             break;
 
         case "4":
+            Console.Write("ID do empréstimo: ");
+            var emprestimoId = Console.ReadLine();
+
+            var resultadoDevolucao = emprestimoService.Devolver(emprestimoId);
+            if (resultadoDevolucao.Sucesso)
+            {
+                var multa = resultadoDevolucao.Dados;
+                if (multa > 0)
+                    System.Console.WriteLine($"Livro devolvido! Multa: {multa:F2}\n");
+                else
+                    System.Console.WriteLine("Livro devolvido no prazo! Sem  multa.\n");
+            }
+            else
+            {
+                System.Console.WriteLine($"Erro: {resultadoDevolucao.Erro}\n");
+            }
+
+            break;
+
+        case "5":
             var livros = livroRepo.ListarTodos();
             if (!livros.Any())
                 System.Console.WriteLine("Nenhum livro cadastrado.");
@@ -98,10 +119,11 @@ while (true)
                     Console.Write($"{l.AnoLancamento} | ");
                 }
             }
+            System.Console.WriteLine();
 
             break;
 
-        case "5":
+        case "6":
             var usuarios = usuarioRepo.ListarTodos();
 
             if (!usuarios.Any())
@@ -116,7 +138,7 @@ while (true)
 
             break;
 
-        case "6":
+        case "7":
             var emprestimos = emprestimoRepo.ListarEmprestimosAtivos();
             if (!emprestimos.Any())
                 System.Console.WriteLine("Nenhum empréstimo cadastrado.");
@@ -130,7 +152,7 @@ while (true)
 
             break;
 
-        case "7":
+        case "8":
             System.Console.WriteLine("Até logo!");
             return;
     }
