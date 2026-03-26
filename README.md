@@ -11,6 +11,7 @@ Este projeto faz parte da minha jornada de reciclagem profissional em C#/.NET.
 [![.NET](https://img.shields.io/badge/.NET-9.0-purple?logo=dotnet)](https://dotnet.microsoft.com)
 [![C#](https://img.shields.io/badge/C%23-12-blue?logo=csharp)](https://learn.microsoft.com/pt-br/dotnet/csharp)
 [![SOLID](https://img.shields.io/badge/SOLID-✅-green)](https://en.wikpedia.org/wiki/SOLID)
+[![Tests](https://img.shields.io/badge/tests-9%20passed-green?logo=xunit)](https://github.com/alexandreo80/MiniBiblioteca)
 [![LICENSE](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 
 Sistema de gerenciamento de empréstimos de livros desenvolvido para **praticar arquitetura limpa, princípios SOLID e Design Patterns** em C# .NET 9.
@@ -151,8 +152,8 @@ else
 
 - [x] Semana 1: Estrutura SOLID
 - [x] Semana 2: Persistência JSON
-- [ ] Semana 3: Validações + Devolução com multa
-- [ ] Semana 4: Testes unitários (xUnit)
+- [X] Semana 3: Validações + Devolução com multa
+- [X] Semana 4: Testes unitários (xUnit)
 
 ---
 
@@ -163,3 +164,20 @@ else
 | **Nome** | Alexandre de Oliveira |
 | **GitHub** | [@alexandreo80](https://github.com/alexandreo80) |
 | **LinkedIn** | [Seu Perfil](https://linkedin.com/in/seu-perfil) |
+
+## 🧪 Testes Unitários
+
+O projeto possui testes unitários para validar as regras de negócio do `EmprestimoService`.
+
+### Cobertura Atual
+
+| Classe | Testes | Status |
+| :--- | :--- | :--- |
+| EmprestimoService | 9 | ✅ Passando |
+
+### Como Rodar os Testes
+
+```bash
+cd MiniBiblioteca.Tests
+dotnet test
+```
