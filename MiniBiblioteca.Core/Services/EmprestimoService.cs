@@ -24,17 +24,17 @@ public class EmprestimoService
         // 1. Validar se livro existe
         var livro = _livroRepo.BuscarPorIsbn(isbn);
         if (livro is null)
-            return ResultadoOperacao<Emprestimo>.CriarErro("Livro não encontrado");
+            return ResultadoOperacao<Emprestimo>.CriarErro("Livro não encontrado.");
 
         // 2. Validar se usuário existe
         var usuario = _usuarioRepo.BuscarPorId(usuarioId);
         if (usuario is null)
-            return ResultadoOperacao<Emprestimo>.CriarErro("Usuário não encontrado");
+            return ResultadoOperacao<Emprestimo>.CriarErro("Usuário não encontrado.");
 
         // 3. Validar se livro já está emprestado
         var emprestimosAtivos = _emprestimoRepo.ListarEmprestimosAtivos();
         if (emprestimosAtivos.Any(e => e.LivroIsbn == isbn))
-            return ResultadoOperacao<Emprestimo>.CriarErro("Livro já está emprestado");
+            return ResultadoOperacao<Emprestimo>.CriarErro("Livro já está emprestado.");
 
         // 4. Criar empréstimo e salvar o empréstimo
         var emprestimo = new Emprestimo
@@ -50,7 +50,7 @@ public class EmprestimoService
         return ResultadoOperacao<Emprestimo>.CriarSucesso(emprestimo);
     }
 
-    public ResultadoOperacao<decimal> Devolver(string emprestimoId)
+    public ResultadoOperacao<decimal> Devolver(string emprestimoId, DateTime? dataDevolucao = null)
     {
         // 1. Buscar o empréstimo
         var emprestimo = _emprestimoRepo.BuscarPorId(emprestimoId);
@@ -66,8 +66,8 @@ public class EmprestimoService
         }
 
         // 3. Marcar data de devolução
-        var dataDevolucao = DateTime.Now;
-        var emprestimoAtualizado = emprestimo with { DataDevolucao = dataDevolucao };
+        var dataDevolucaoEfetiva = dataDevolucao ?? DateTime.Now;
+        var emprestimoAtualizado = emprestimo with { DataDevolucao = dataDevolucaoEfetiva };
 
         // 4. Calcular multa (se houver atraso)
         var multa = CalcularMulta(emprestimoAtualizado);

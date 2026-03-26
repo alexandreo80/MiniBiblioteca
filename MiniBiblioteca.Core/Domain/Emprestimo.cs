@@ -7,7 +7,7 @@ public record Emprestimo
     string UsuarioId,
     DateTime DataEmprestimo,
     DateTime? DataDevolucao,
-    int PrazoDias =7
+    int PrazoDias = 7
 )
 
 {
