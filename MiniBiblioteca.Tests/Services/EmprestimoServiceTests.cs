@@ -168,10 +168,14 @@ public class EmprestimoServiceTests
     [Fact]
     public void Devolver_ComAtraso_CalculaMultaCorretamente()
     {
+        var ano = DateTime.Now.Year;
+        var mes = DateTime.Now.Month;
+        var dia = DateTime.Now.Day - 9;
+
         // Arrange: emprestado em 01/03, prazo 7 dias, devolvido em 15/03 (2 dias atraso)
         var emprestimo = new Emprestimo(
             "EMP001", "ISBN-123", "USR001",
-            new DateTime(2026, 3, 17),
+            new DateTime(ano, mes, dia),
             DataDevolucao: null, // Ainda não foi devolvido
             7
         );
